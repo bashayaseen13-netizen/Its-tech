@@ -1,0 +1,3 @@
+import {NextResponse} from "next/server";
+import {buildResearchDossier} from "@/lib/editorial";
+export async function POST(req:Request){try{const {topic}=await req.json();if(!topic)return NextResponse.json({error:"Topic is required"},{status:400});return NextResponse.json(await buildResearchDossier(topic))}catch(e){console.error(e);return NextResponse.json({error:"Research failed. Check OPENAI_API_KEY and model access."},{status:500})}}
