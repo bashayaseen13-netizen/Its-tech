@@ -1,0 +1,3 @@
+import {NextResponse} from "next/server";
+import {generateArticle} from "@/lib/editorial";
+export async function POST(req:Request){try{const {dossier}=await req.json();if(!dossier)return NextResponse.json({error:"Dossier is required"},{status:400});return NextResponse.json({article:await generateArticle(dossier)})}catch(e){console.error(e);return NextResponse.json({error:"Article generation failed. Check OPENAI_API_KEY and model access."},{status:500})}}
